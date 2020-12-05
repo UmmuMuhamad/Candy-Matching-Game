@@ -34,6 +34,9 @@ Match3.GameState = {
 
         // we will create method to draw board and call it here
         this.drawBoard();
+
+        this.score = 0;
+        this.scoreText = this.add.text(36, 50,'Score:  ' + this.score, {fontSize: 36}); 
         
     },
 
@@ -211,7 +214,8 @@ Match3.GameState = {
                 var chains = this.board.findAllChains();
 
                 if (chains.length > 0){ // means there is a chain
-                   this.updateBoard()
+                    this.updateScore();
+                    this.updateBoard();
 ;
                     
                     
@@ -295,13 +299,23 @@ Match3.GameState = {
             // see if there are new chains
             var chains = this.board.findAllChains();
             if (chains.length > 0){ 
-                this.updateBoard()
+                this.updateScore();
+                this.updateBoard();
                 }
             else{
                 this.clearSelection();
             }
                
         }, this)
+
+    },
+
+     updateScore: function(){
+        
+        this.score = this.score + 1;
+        
+        this.scoreText.text= 'Score: ' + this.score;
+        
 
     }
 };
