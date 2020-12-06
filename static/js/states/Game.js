@@ -10,11 +10,12 @@ Match3.GameState = {
         this.NUM_VARIATIONS = 7; 
         this.BLOCK_SIZE = 35;
         // 200 miliseconds
-        this.ANIMATION_TIME = 200; 
-
-        
+        this.SWAP_ANIMATION = 200; 
+        this.DROP_ANIMATION = 600;
+             
+       
     },
-
+      
     create: function(){
         
         // game backgroud
@@ -37,7 +38,7 @@ Match3.GameState = {
 
         this.score = 0;
         this.scoreText = this.add.text(36, 50,'Score:  ' + this.score, {fontSize: 36}); 
-        
+       
     },
 
     // we want to create individual block to be able to reuse these elements in a pool objects.
@@ -65,7 +66,6 @@ Match3.GameState = {
         else { // if the blocks already exists
             block.reset(x, y, data); //set the block back to being alive
         }   
-        // console.log(block)
         return block;
 
     },
@@ -160,7 +160,7 @@ Match3.GameState = {
         // 'to' is property of Phaser.Tween
         // to(properties(object) = properties of the object that we want to tween, duration)
         // here we want to move y coordinate of the souce block to the targetY coodinate
-        blockMovement.to({y: targetY}, this.ANIMATION_TIME)
+        blockMovement.to({y: targetY}, this.DROP_ANIMATION)
         
         // start the tween running
         blockMovement.start();
@@ -187,7 +187,7 @@ Match3.GameState = {
 
         blockMovement =this.game.add.tween(block);
  
-        blockMovement.to({y: targetY}, this.ANIMATION_TIME)
+        blockMovement.to({y: targetY}, this.DROP_ANIMATION);
         blockMovement.start();
         
     },
@@ -199,7 +199,7 @@ Match3.GameState = {
         // add tween to block 1
         var block1Movement = this.game.add.tween(block1);
         // change block 1 coordinate to block 2
-        block1Movement.to({x: block2.x, y: block2.y}, this.ANIMATION_TIME);
+        block1Movement.to({x: block2.x, y: block2.y}, this.SWAP_ANIMATION);
           
         // onComplete event is fired when the Tween and all of its children completes.
         // 'add' is to add an event listener for this signal
@@ -236,18 +236,15 @@ Match3.GameState = {
         // add tween to block 2
         var block2Movement = this.game.add.tween(block2);
         // change block 2 coordinate to block 2
-        block2Movement.to({x: block1.x, y: block1.y}, this.ANIMATION_TIME);
+        block2Movement.to({x: block1.x, y: block1.y}, this.SWAP_ANIMATION);
         block2Movement.start();
      
     },
 
     pickBlock: function(block){
-
         if (this.isBoardBlocked){ //if UI(user interface is blocked)
-            console.log('block')
             return;
         }
-
         // if there is nothing selected yet, then user able to select the candies
         if(!this.selectedBlock){
             //will change the block size that has been selected
@@ -294,9 +291,9 @@ Match3.GameState = {
         this.board.updateGrid();
         
         // after dropping has ended
-        this.game.time.events.add(this.ANIMATION_TIME, function(){
-
-            // see if there are new chains
+        // for 200 seconds check
+        this.game.time.events.add(200, function(){
+            // see if there are chains
             var chains = this.board.findAllChains();
             if (chains.length > 0){ 
                 this.updateScore();
@@ -319,3 +316,5 @@ Match3.GameState = {
 
     }
 };
+
+

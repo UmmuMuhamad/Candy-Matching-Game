@@ -21,17 +21,21 @@ Match3.PreloadState ={
         this.load.setPreloadSprite(this.preloadBar);
 
         // load game assets
-        this.load.image('block1', 'static/images/bean_blue.png')
-        this.load.image('block2', 'static/images/bean_green.png')
-        this.load.image('block3', 'static/images/bean_orange.png')
-        this.load.image('block4', 'static/images/bean_pink.png')
-        this.load.image('block5', 'static/images/bean_purple.png')
-        this.load.image('block6', 'static/images/bean_yellow.png')
-        this.load.image('block7', 'static/images/bean_red.png')
-        this.load.image('block8', 'static/images/bean_white.png')
-        this.load.image('deadBlock', 'static/images/bean_dead.png')
+        this.load.image('block1', 'static/images/apple.png')
+        this.load.image('block2', 'static/images/banana.png')
+        this.load.image('block3', 'static/images/watermelon.png')
+        this.load.image('block4', 'static/images/strawberry.png')
+        this.load.image('block5', 'static/images/pear.png')
+        this.load.image('block6', 'static/images/orange.png')
+        this.load.image('block7', 'static/images/durian.png')
+        this.load.spritesheet('block1Burst', 'static/images/apple_explode.png',35, 35);
+        this.load.spritesheet('block2Burst', 'static/images/banana_explode.png',35, 35);
+        this.load.spritesheet('block3Burst', 'static/images/watermelon_explode.png',35, 35);
+        this.load.spritesheet('block4Burst', 'static/images/strawberry_explode.png',35, 35);
+        this.load.spritesheet('block5Burst', 'static/images/pear_explode.png',35, 35);
+        this.load.spritesheet('block6Burst', 'static/images/orange_explode.png',35, 35);
+        this.load.spritesheet('block7Burst', 'static/images/durian_explode.png',35, 35);
         this.load.image('background', 'static/images/backyard2.png');
-
         
     },
 

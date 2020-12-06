@@ -54,28 +54,36 @@ Match3.Block.prototype.reset = function(x, y , data){
 
 Match3.Block.prototype.kill = function(){
 
-    // the block will change to deadBlock image
-    this.loadTexture('deadBlock');
-
+    // the block will change to block burst image
+    this.loadTexture(this.key +'Burst');
+    // add animation to the block burst
+    this.anim = this.animations.add('burst');
+    // play(framerate = framerateto play the animation. The speed is gives in frame per second, loop = boolean)
+    this.anim.play(10, false);
     this.col = null;
     this.row = null;
-
+    
+    
     // here is animation time that our block will be killed
     // time is the core internal game clock. It constructor is Phaser.time It manages the elapsed time and calculation of elapsed values, used for game object motion and tweens, and also handles the standard Timer pool.
     // events is a Phaser.Timer object bound to the master clock which events can be added to. It constructor is Phaser.Timer.
     // 'add' will adds a new Events to this Timer
     // add(delay= number in milliseconds, in game time, before the timer event occurs, callback = is a function that will be called when the timer event occurs)
-    this.game.time.events.add(this.state.ANIMATION_TIME/2, function(){
-
+    this.game.time.events.add(500, function(){
         // kill() is to kills a game object
         // it will sets the game object alive, exists and visible to false.
         // after finish the delay time, the deadBean will dessapear.
         Phaser.Sprite.prototype.kill.call(this);
+
         // will return PIXI.Display.Object
         
     }, this);
     // will return Phaser.Timer.Event
 
+  
 };
+
+
+
 
 
